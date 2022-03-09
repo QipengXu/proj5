@@ -100,7 +100,7 @@ func (surfClient *RPCClient) GetFileInfoMap(serverFileInfoMap *map[string]*FileM
 			} else if err.Error() == "rpc error: code = Unknown desc = Server is crashed." {
 				continue
 			} else if err == context.DeadlineExceeded {
-				os.Exit(2)
+				os.Exit(1)
 			} else {
 				conn.Close()
 				return err
@@ -130,7 +130,7 @@ func (surfClient *RPCClient) UpdateFile(fileMetaData *FileMetaData, latestVersio
 			} else if err.Error() == "rpc error: code = Unknown desc = Server is crashed." {
 				continue
 			} else if err == context.DeadlineExceeded {
-				os.Exit(2)
+				os.Exit(1)
 			} else {
 				conn.Close()
 				return err
@@ -161,7 +161,7 @@ func (surfClient *RPCClient) GetBlockStoreAddr(blockStoreAddr *string) error {
 			} else if err.Error() == "rpc error: code = Unknown desc = Server is crashed." {
 				continue
 			} else if err == context.DeadlineExceeded {
-				os.Exit(2)
+				os.Exit(1)
 			} else {
 				conn.Close()
 				return err
