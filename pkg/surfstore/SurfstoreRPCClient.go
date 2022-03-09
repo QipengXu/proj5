@@ -3,7 +3,6 @@ package surfstore
 import (
 	context "context"
 	"errors"
-	"os"
 	"time"
 
 	"google.golang.org/protobuf/types/known/emptypb"
@@ -100,7 +99,7 @@ func (surfClient *RPCClient) GetFileInfoMap(serverFileInfoMap *map[string]*FileM
 			} else if err.Error() == "rpc error: code = Unknown desc = Server is crashed." {
 				continue
 			} else if err == context.DeadlineExceeded {
-				os.Exit(1)
+				panic(err)
 			} else {
 				conn.Close()
 				return err
@@ -130,7 +129,7 @@ func (surfClient *RPCClient) UpdateFile(fileMetaData *FileMetaData, latestVersio
 			} else if err.Error() == "rpc error: code = Unknown desc = Server is crashed." {
 				continue
 			} else if err == context.DeadlineExceeded {
-				os.Exit(1)
+				panic(err)
 			} else {
 				conn.Close()
 				return err
@@ -161,7 +160,7 @@ func (surfClient *RPCClient) GetBlockStoreAddr(blockStoreAddr *string) error {
 			} else if err.Error() == "rpc error: code = Unknown desc = Server is crashed." {
 				continue
 			} else if err == context.DeadlineExceeded {
-				os.Exit(1)
+				panic(err)
 			} else {
 				conn.Close()
 				return err
