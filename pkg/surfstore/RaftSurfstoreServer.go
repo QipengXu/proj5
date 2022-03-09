@@ -43,6 +43,13 @@ func (s *RaftSurfstore) GetFileInfoMap(ctx context.Context, empty *emptypb.Empty
 		return nil, ERR_SERVER_CRASHED
 	}
 	s.isCrashedMutex.RUnlock()
+	infoMap, err := s.metaStore.GetFileInfoMap(ctx, &emptypb.Empty{})
+	if err != nil {
+		log.Printf("Err occurred when applying to state machine, err=%v", err)
+		return nil, err
+	}
+	return infoMap, nil
+
 	ch := make(chan string, len(s.serversIP))
 	for idx := 0; idx < len(s.serversIP); idx++ {
 		if idx == int(s.serverId) {
@@ -135,6 +142,13 @@ func (s *RaftSurfstore) GetBlockStoreAddr(ctx context.Context, empty *emptypb.Em
 		return nil, ERR_SERVER_CRASHED
 	}
 	s.isCrashedMutex.RUnlock()
+	addr, err := s.metaStore.GetBlockStoreAddr(ctx, &emptypb.Empty{})
+	if err != nil {
+		log.Printf("Err occurred when applying to state machine, err=%v", err)
+		return nil, err
+	}
+	fmt.Printf("[GetBlockStoreAddr] I'm %v,Get block addr succeed=%v\n", s.serverId, addr)
+	return addr, nil
 	//fmt.Printf("[GetBlockStoreAddr]%v", s.nextIndex)
 	//fmt.Printf("[GetBlockStoreAddr] request received, len(s.serversIP)=%v\n", len(s.serversIP))
 	ch := make(chan string, len(s.serversIP))
