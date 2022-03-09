@@ -3,7 +3,6 @@ package surfstore
 import (
 	context "context"
 	"errors"
-	"fmt"
 	"sync"
 )
 
@@ -30,7 +29,7 @@ func (bs *BlockStore) PutBlock(ctx context.Context, block *Block) (*Success, err
 	hashName := GetBlockHashString(block.GetBlockData())
 	bs.BlockMap[hashName] = block
 	success := Success{Flag: true}
-	fmt.Println(bs.BlockMap)
+	// fmt.Println(bs.BlockMap)
 	return &success, nil
 }
 

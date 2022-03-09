@@ -1,7 +1,6 @@
 package surfstore
 
 import (
-	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
@@ -20,7 +19,7 @@ func ClientSync(client RPCClient) {
 		log.Printf("ClientSync: Err when getting block server address, err=%v\n", err)
 		return
 	}
-	fmt.Printf("[ClientSync] block addr=%v\n", *blockStoreAddrPtr)
+	// fmt.Printf("[ClientSync] block addr=%v\n", *blockStoreAddrPtr)
 	// load local file information map
 	localFileInfoMap, err := LoadMetaFromMetaFile(baseDir)
 	if err != nil {

@@ -3,9 +3,9 @@ package SurfTest
 import (
 	context "context"
 	"cse224/proj5/pkg/surfstore"
-	"fmt"
-	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	"testing"
+
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 func TestRaftSetLeader(t *testing.T) {
@@ -104,10 +104,10 @@ func TestRaftFollowersGetUpdates(t *testing.T) {
 	test.Clients[leaderIdx].SendHeartbeat(context.Background(), &emptypb.Empty{})
 	for _, server := range test.Clients {
 		state, _ := server.GetInternalState(test.Context, &emptypb.Empty{})
-		fmt.Println(state.Log)
-		fmt.Println(goldenLog)
-		fmt.Println(state.MetaMap.FileInfoMap)
-		fmt.Println(goldenMeta.FileMetaMap)
+		// fmt.Println(state.Log)
+		// fmt.Println(goldenLog)
+		// fmt.Println(state.MetaMap.FileInfoMap)
+		// fmt.Println(goldenMeta.FileMetaMap)
 		if !SameLog(goldenLog, state.Log) {
 			t.Log("Logs do not match")
 			t.Fail()
